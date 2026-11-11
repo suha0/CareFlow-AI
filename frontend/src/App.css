@@ -4286,3 +4286,69 @@ textarea:focus-visible {
     font-size: 24px;
   }
 }
+
+
+/* Password visibility toggle */
+.auth-password-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s ease;
+}
+
+.auth-password-toggle:hover {
+  color: #6658e8;
+}
+
+.auth-input input {
+  min-width: 0;
+}
+
+/* Forgot password link */
+.auth-forgot-password {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -12px;
+  margin-bottom: 4px;
+}
+
+.auth-forgot-password button {
+  border: none;
+  background: transparent;
+  color: #6658e8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.auth-forgot-password button:hover {
+  color: #5143c7;
+  text-decoration: underline;
+}
+
+/* Back to sign in */
+.auth-back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 20px;
+  border: none;
+  background: transparent;
+  color: #6658e8;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-back-button:hover {
+  color: #5143c7;
+}
