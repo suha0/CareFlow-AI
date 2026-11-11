@@ -35,11 +35,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .anyRequest().authenticated()
-)
-.addFilterBefore(
-    jwtAuthenticationFilter,
-    UsernamePasswordAuthenticationFilter.class
-);
+            )
+            .addFilterBefore(
+                jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class
+            );
 
         return http.build();
     }
@@ -50,7 +50,10 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-            List.of("http://localhost:5173")
+            List.of(
+                "http://localhost:5173",
+                "https://care-flow-ai-rosy.vercel.app"
+            )
         );
 
         configuration.setAllowedMethods(
