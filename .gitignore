@@ -11,6 +11,7 @@ backend/.mvn/wrapper/maven-wrapper.jar
 # Backend configuration containing possible secrets
 backend/src/main/resources/application.properties
 backend/src/main/resources/application-*.properties
+!backend/src/main/resources/application-prod.properties
 
 # Frontend dependencies and generated files
 frontend/node_modules/
