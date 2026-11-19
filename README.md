@@ -58,6 +58,10 @@ Install the following before running the application:
 
 You will also need a Google Gemini API key and the credentials/settings required by your chosen email provider.
 
+## 🌐 Live Demo
+
+**Try CareFlow AI here:** [CareFlow AI – Live Application](https://care-flow-ai-rosy.vercel.app)
+
 ## Run Locally
 
 ### 1. Clone the Repository
