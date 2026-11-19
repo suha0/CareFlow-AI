@@ -4352,3 +4352,68 @@ textarea:focus-visible {
 .auth-back-button:hover {
   color: #5143c7;
 }
+
+.profile-menu-wrapper {
+  position: relative;
+}
+
+.topbar-avatar {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  font: inherit;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 230px;
+  padding: 10px;
+  background: #101827;
+  border: 1px solid #263449;
+  border-radius: 12px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+.profile-dropdown-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  border-bottom: 1px solid #263449;
+  margin-bottom: 8px;
+}
+
+.profile-dropdown-info strong {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.profile-dropdown-info span {
+  color: #94a3b8;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.profile-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px;
+  color: #cbd5e1;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.profile-dropdown button:hover {
+  background: #1e293b;
+}
+
+.profile-dropdown .logout-option {
+  color: #fb7185;
+}

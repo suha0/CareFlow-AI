@@ -23,7 +23,7 @@ import Auth from './components/Auth';
 
 const menuItems = [
   { name: 'Overview', icon: LayoutDashboard },
-  { name: 'AI Inbox', icon: MessageSquare, count: '8' },
+  { name: 'AI Inbox', icon: MessageSquare },
   { name: 'Appointments', icon: CalendarDays },
   { name: 'Automation', icon: Workflow },
   { name: 'Patients', icon: Users },
@@ -69,6 +69,7 @@ const isGoingBack = useRef(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const [notificationOpen, setNotificationOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   const [periodOpen, setPeriodOpen] = useState(false);
 const [selectedPeriod, setSelectedPeriod] = useState('This week');
@@ -164,6 +165,14 @@ const handleGoBack = () => {
 
   isGoingBack.current = true;
   setActivePage(previousPage);
+};
+
+const handleLogout = () => {
+  localStorage.removeItem('careflowToken');
+  localStorage.removeItem('careflowUser');
+
+  setProfileMenuOpen(false);
+  setIsAuthenticated(false);
 };
 
 useEffect(() => {
@@ -682,7 +691,6 @@ if (!isAuthenticated) {
             >
               <Icon size={19} />
               <span>{name}</span>
-              {count && <span className="nav-count">{count}</span>}
             </button>
           ))}
         </nav>
@@ -770,7 +778,40 @@ if (!isAuthenticated) {
               )}
             </div>
 
-            <div className="topbar-avatar">SM</div>
+            <div className="profile-menu-wrapper">
+  <button
+    className="topbar-avatar"
+    onClick={() => setProfileMenuOpen((current) => !current)}
+    aria-label="Open profile menu"
+    aria-expanded={profileMenuOpen}
+  >
+    SM
+  </button>
+
+  {profileMenuOpen && (
+    <div className="profile-dropdown">
+      <div className="profile-dropdown-info">
+        <strong>{settings.adminName || 'Clinic Admin'}</strong>
+        <span>{settings.adminEmail}</span>
+      </div>
+
+      <button
+        onClick={() => {
+          setActivePage('Settings');
+          setProfileMenuOpen(false);
+        }}
+      >
+        <Users size={16} />
+        My Profile
+      </button>
+
+      <button className="logout-option" onClick={handleLogout}>
+        <X size={16} />
+        Log Out
+      </button>
+    </div>
+  )}
+</div>
           </div>
         </header>
 
