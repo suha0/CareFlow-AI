@@ -33,9 +33,13 @@ public class SecurityConfig {
                 )
             )
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
-            )
+    .requestMatchers("/api/auth/**").permitAll()
+    .requestMatchers(
+        org.springframework.http.HttpMethod.POST,
+        "/api/enquiries"
+    ).permitAll()
+    .anyRequest().authenticated()
+)
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class
