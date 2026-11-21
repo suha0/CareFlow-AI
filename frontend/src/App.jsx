@@ -58,6 +58,24 @@ resolvedAt: item.resolvedAt || null,
   status: item.status === 'NEW' ? 'Needs review' : item.status,
 });
 
+
+const isAppointmentEnquiry = (item) => {
+  const intent = String(item.intent || '').toLowerCase();
+  const message = String(item.message || '').toLowerCase();
+
+  // Use the saved enquiry category when available
+  if (intent.includes('appointment')) {
+    return true;
+  }
+
+  // Also detect appointment requests from the patient's message
+  const appointmentKeywords =
+    /\b(appointment|appointments|book a doctor|book doctor|schedule a visit|schedule an appointment|reschedule|consultation|consult a doctor|doctor availability|visit the clinic|clinic visit)\b/i;
+
+  return appointmentKeywords.test(message);
+};
+
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
   () => Boolean(localStorage.getItem('careflowToken'))
@@ -365,8 +383,8 @@ const patients = Array.from(
   ).values()
 );
 
-const appointmentRequests = enquiriesData.filter((item) =>
-  String(item.intent || '').toLowerCase().includes('appointment')
+const appointmentRequests = enquiriesData.filter(
+  isAppointmentEnquiry
 );
 
 const automationStats = {
@@ -392,10 +410,15 @@ const handleCreateEnquiry = async (event) => {
 
   try {
     const enquiryData = {
-      patientName: newName.trim(),
-      message: newMessage.trim(),
-      enquiryType: 'General enquiry',
-    };
+  patientName: newName.trim(),
+  message: newMessage.trim(),
+  enquiryType: isAppointmentEnquiry({
+    intent: '',
+    message: newMessage,
+  })
+    ? 'Appointment'
+    : 'General enquiry',
+};
 
     // Save enquiry to Spring Boot / MySQL
     const savedEnquiry = await createEnquiry(enquiryData);
